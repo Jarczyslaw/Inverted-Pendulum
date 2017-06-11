@@ -1,3 +1,5 @@
+% porownanie czasu wykonywania symulacji w Simulinku i ze skryptu
+
 clearvars;
 
 tSim = 10;
@@ -27,7 +29,7 @@ toc();
 
 % dyskretny + matlab function
 tic();
-sim('mdl2.slx');
+sim('mdl3.slx');
 toc();
 
 plot(t,y,t1,y1,t2,y2);

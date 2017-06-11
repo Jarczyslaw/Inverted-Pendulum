@@ -1,3 +1,6 @@
+% glowny skrypt uruchamiajacy symulacje wahadla z uzyciem prostych metod
+% calkowania rownan rozniczkowych
+
 clearvars;
 
 % parametry symulacji
@@ -26,6 +29,10 @@ params = [M,m,L,I,b,g];
 
 % wybor modelu i regulatora
 modelSelect = 'full';
+
+% zmienne do PIDa
+lastE = 0;
+sumE = 0;
 
 % symulacja w skrypcie
 y = zeros(4,tt);
@@ -61,21 +68,10 @@ for i = 1:tt
     end
     
     %regulator
-    %u(i) = -[-10.4058,-118.3376,-15.1782,-10] * y(:,i) + y(2,i) + setPos(i,2);
-    %[u(i), sumE, lastE] = PID([0.1, 1000000, 7], sumE, lastE, 0.5 - y(4,i));
-    %u(i) = -3 * sin(10 * h * i);
-    lastE = 0;
-    sumE = 0;
-    thetaDot = y(1,i);
-    theta = y(2,i);  
-    xDot = y(3,i);
-    x = y(4,i);
-    if (abs(rem(theta,2*pi)) <= 2/18*pi)
-         u(i) = -20 * (0 - theta);
-        %u(i) = -[-10.4058,-118.3376,-15.1782,-10] * y(:,i);
-    else
-        [u(i),sumE,lastE] = PID([1,0.3,0.1],0,lastE,0.5 - x);
-    end
+    % LQR
+    % u(i) = -[-10.4058,-118.3376,-15.1782,-10] * y(:,i) + y(2,i) + setPos(i,2);
+    % PID - zle nastrojony ale warto sprawdzic co sie stanie
+    % [u(i), sumE, lastE] = PID([0.1, 1000000, 7], sumE, lastE, 0.5 - y(4,i));
 end
 y = y';
 toc();

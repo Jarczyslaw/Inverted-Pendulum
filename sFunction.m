@@ -1,3 +1,4 @@
+% pusty template s-funkcji
 function [ sys,state0,str,ts ] = sFunction( t,state,u,flag )
     switch flag
         case 0 % inicjalizacja
